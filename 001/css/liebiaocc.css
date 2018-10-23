@@ -1,0 +1,40 @@
+*{
+				margin: 0;
+				padding: 0;
+			}
+			body{
+				font-size: 14px;
+				font-family: "微软雅黑";
+			}
+			ul{
+				 margin: 80px 0 0 80px;
+				 width: 200px;
+			}
+			ul li{
+				list-style: none;
+				background-color: #A3C83A;
+				width: 200px;
+				height: 36px;
+				margin-bottom: 12px;
+				border-radius: 10px;
+				line-height: 36px;
+			}
+			img{
+				padding-left: 24px;
+			}
+			span{
+				padding-left: 14px;
+				color: #fff;
+			}
+			ul li:hover{
+				background-color: #000;
+				padding-left: 10px;
+				display: block;
+				border-radius: 10px;
+				width: 190px;
+				height: 36px;
+				cursor: pointer;
+			}
+			a{
+				text-decoration: none;
+			}
