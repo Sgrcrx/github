@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			.box {
+				width: 600px;
+				height: 600px;
+				border: solid 1px red;
+				margin: 50px auto;
+				position: relative;
+				overflow: hidden;
+			}
+			
+			.bubble {
+				width: 30px;
+				height: 30px;
+				background-image: url(img/blue.png);
+				background-size: contain;
+				position: absolute;
+				top: 0px;
+				left: 0px;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div class="box"></div>
+
+		<script type="text/javascript">
+			class bubble {
+				constructor() {
+					// 宽度 ：20~50
+					this.width = 20 + Math.random() * 30;
+					// 高度
+					this.height = this.width;
+					// 半径
+					this.r = this.width / 2;
+					
+					/**位置：x,y**/
+					this.x = Math.random() * (600 - this.which);
+					this.y = Math.random() * (600 - this.height);
+
+					/**圆心**/
+					this.x0 = this.x + this.r;
+					this.y0 = this.y + this.r;
+					// 移动方向
+					this.d = Math.random() * 360;
+					// 移动的速度 1~5
+					this.v = 1 + Math.random() * 4;
+					this.oDiv = document.createElement("div");
+
+					// 添加类名
+					this.oDiv.setAttribute("class", "bubble");
+					// 给定一个初始位置
+					this.oDiv.style.left = this.x + "px";
+					this.oDiv.style.top = this.y + "px";
+				}
+
+				// 设置作为位置
+				setPosition(x, y) {
+
+					// 越界处理
+//					x = (x < -1 * this.width) ? 600 : x;
+//					x = x > 600 ? -1 * this.width : x;
+//					y = (y < -1 * this.height) ? 600 : y;
+//					y = y > 600 ? -1 * this.height : y;
+					if(x <= 0 || y <= 0 || x > (600 - this.w) || y > (600 - this.h)) {
+						this.d = (this.d + Math.PI) % (Math.PI * 2);
+					}
+
+					this.x = x;
+					this.y = y;
+					
+					// 圆心
+					this.x0 = this.x + this.r;
+					this.y0 = this.y + this.r;
+
+					this.oDiv.style.left = this.x + "px";
+					this.oDiv.style.top = this.y + "px";
+				}
+
+				// 移动
+				move() {
+//					let x1 = this.x + this.v * Math.cos(this.d / 180 * Math.PI);
+//					let y1 = this.y + this.v * Math.sin(this.d / 180 * Math.PI);
+					
+					let x1 = this.x + this.v * Math.cos(this.d);
+					let y1 = this.y + this.v * Math.sin(this.d);
+					this.setPosition(x1, y1);
+				}
+			}
+
+			let wrap = document.querySelector(".box");
+			let bubbles = [];
+
+			for(let i = 0; i < 20; i++) {
+				let b = new bubble();
+				bubbles.push(b);
+				wrap.appendChild(b.oDiv);
+			}
+
+			let t = setInterval(function() {
+				for(let i = 0; bubbles.length; i++) {
+					bubbles[i].move();
+				}
+			}, 100);
+		</script>
+
+	</body>
+
+</html>
